@@ -1,6 +1,9 @@
 from .objects import Dollars
 
-def house_price(mortgage_payment: float, frac_down=0.2, years=30, annual_rate=0.045):
+def house_price(
+    mortgage_payment: float, *, 
+    frac_down: float=0.2, years: int=30, 
+    annual_rate: float=0.045):
     """Given a monthly mortgage payment, returns the price of the house and down payment.
     
     This is useful for calculating the price of a house you can afford given
