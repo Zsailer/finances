@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from .constants import brackets
 
 def federal_taxes(taxable_income, status='married-jointly'):
     """Calculate federal taxes on taxable income (assuming graduated).
@@ -12,7 +13,8 @@ def federal_taxes(taxable_income, status='married-jointly'):
     idx = col[col > taxable_income].index[0]
 
     # Calculate fraction of highest bracket
-    amount = (taxable_income - brackets.iloc[idx-1][status]) * brackets.iloc[idx]['rate']
+    amount = (taxable_income -
+              brackets.iloc[idx-1][status]) * brackets.iloc[idx]['rate']
 
     # Calculate amount
     for i in range(idx):

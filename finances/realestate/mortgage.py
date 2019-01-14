@@ -1,10 +1,11 @@
-from .objects import Dollars
-from .realestate import (
+from ..objects import Dollars
+from .calculators import (
     total_mortgage_breakdown,
     mortgage_payment
 )
 
-class LiveMortgageLoan:
+
+class LiveMortgage:
     """Explore a live mortgage.
     
     This object assumes an amortized loan. 
@@ -42,6 +43,10 @@ class LiveMortgageLoan:
         )
 
     @property
+    def down_payment(self):
+        return self.original_price * self.frac_down
+
+    @property
     def monthly_payment(self):
         return mortgage_payment(
             self.original_price,
@@ -70,7 +75,7 @@ class LiveMortgageLoan:
             current_year = self.current_year
         monthly_rate = self.annual_interest_rate / 12
         monthly_payment = self.monthly_payment
-        principal = self.original_price
+        principal = self.original_price * (1 - self.frac_down)
         for month in range(current_year * 12):
             interest_payment = principal * monthly_rate
             principal_paid = monthly_payment - interest_payment
@@ -80,16 +85,19 @@ class LiveMortgageLoan:
     def predicted_profit(self, current_year=None, average_appreciate_rate=None):
         """Calculate the predicted profit.
         """
-        appreciated_principal = self.predicted_appreciation(
-            current_year=current_year, 
+        appreciated_price = self.predicted_appreciation(
+            current_year=current_year,
             average_appreciate_rate=average_appreciate_rate)
         predicted_leftover = self.predicted_leftover_principal(
             current_year=current_year)
         total_paid = self.total_paid(current_year=current_year)
-        equity = appreciated_principal - predicted_leftover
+        equity = appreciated_price - predicted_leftover - self.down_payment
         profit = equity - total_paid
-        return profit 
+        return profit
 
 
-class RentalMortgage(LiveMortgageLoan):
+
+
+
+class RentalMortgage(LiveMortgage):
     pass

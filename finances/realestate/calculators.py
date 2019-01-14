@@ -1,4 +1,4 @@
-from .objects import Dollars
+from ..objects import Dollars
 
 def house_price(
     mortgage_payment: float, *, 
