@@ -1,9 +1,12 @@
 from ..objects import Dollars
+from .constants import (
+    INTEREST_RATES,
+)
 
 def house_price(
     mortgage_payment: float, *, 
     frac_down: float=0.2, years: int=30, 
-    annual_rate: float=0.045):
+    annual_rate: float=INTEREST_RATES):
     """Given a monthly mortgage payment, returns the price of the house and down payment.
     
     This is useful for calculating the price of a house you can afford given
@@ -34,7 +37,7 @@ def house_price(
 def mortgage_payment(
     house_price: float, *,
     frac_down: float = 0.2, years: int = 30,
-    annual_rate: float = 0.045):
+    annual_rate: float = INTEREST_RATES):
     """Given the price of a house, return the estimated monthly mortgage payment.
 
     Formulas for the loan ammount 
@@ -62,7 +65,7 @@ def mortgage_payment(
 
 def total_mortgage_breakdown(house_price: float, *,
     frac_down: float = 0.2, years: int = 30,
-    annual_rate: float = 0.045):
+    annual_rate: float = INTEREST_RATES):
     """Calculate the total mortgage breakdown: down payment, equity gained, and interested paid.
     """
     # Breakdown mortgage payement

@@ -3,10 +3,22 @@ import numpy as np
 import altair as alt
 
 from .calculators import mortgage_payment
+from .constants import (
+    INTEREST_RATES,
+    ANNUAL_APPRECIATION_RATE
+)
 
 def _data_over_time(house_price, monthly_payment=None, 
-    frac_down=0.2, years=30, apr=0.045, appreciate_rate=0.05):
-    """
+    frac_down=0.2, years=30, apr=INTEREST_RATES, 
+    appreciate_rate=ANNUAL_APPRECIATION_RATE):
+    """Summary of the lifetime of a loan.
+
+    Returns a DataFrame with columns:
+    1. time (months)
+    2. equity
+    3. principal
+    4. profit
+    5. estimated_price
     """
     if monthly_payment is None:
         monthly_payment, down_payment = mortgage_payment(house_price, frac_down=frac_down,
@@ -15,6 +27,7 @@ def _data_over_time(house_price, monthly_payment=None,
     monthly_rate = apr / 12
     monthly_appreciate = appreciate_rate / 12
     price = house_price
+    down_payment = house_price * frac_down
 
     time = np.arange(0, years*12+1)
     equity = np.empty(len(time), dtype=float)
@@ -48,7 +61,8 @@ def _data_over_time(house_price, monthly_payment=None,
 
 
 def plot_equity_over_time(house_price, monthly_payment=None,
-    frac_down=0.2, years=30, apr=0.045, appreciate_rate=0.05):
+    frac_down=0.2, years=30, apr=INTEREST_RATES, 
+    appreciate_rate=ANNUAL_APPRECIATION_RATE):
     """"""
     df = _data_over_time(
         house_price, monthly_payment=monthly_payment,
@@ -84,7 +98,8 @@ def plot_equity_over_time(house_price, monthly_payment=None,
 
 
 def plot_profit_over_time(house_price, monthly_payment=None,
-                          frac_down=0.2, years=30, apr=0.045, appreciate_rate=0.05):
+                          frac_down=0.2, years=30, apr=INTEREST_RATES, 
+                          appreciate_rate=ANNUAL_APPRECIATION_RATE):
     """"""
     df = _data_over_time(
         house_price, monthly_payment=monthly_payment,

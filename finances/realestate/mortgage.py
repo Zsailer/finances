@@ -3,7 +3,10 @@ from .calculators import (
     total_mortgage_breakdown,
     mortgage_payment
 )
-
+from .constants import (
+    INTEREST_RATES,
+    ANNUAL_APPRECIATION_RATE
+)
 
 class LiveMortgage:
     """Explore a live mortgage.
@@ -13,8 +16,8 @@ class LiveMortgage:
     def __init__(self, original_price,
         frac_down=0.0,
         years_of_loan=30,
-        annual_interest_rate=0.05,
-        average_appreciate_rate=0.05,
+        annual_interest_rate=INTEREST_RATES,
+        average_appreciate_rate=ANNUAL_APPRECIATION_RATE,
         current_year=0
         ):
         self.original_price = Dollars(original_price)
