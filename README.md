@@ -5,12 +5,12 @@
 This is built with simplicity in mind.
 
 You can use this library to:
-    * Predict investment growth over time
-    * Estimate the monthly payments on car loans, mortgages, student loans, etc.
-    * Approximate your total federal and state taxes.
-    * Compare investments.
-    * Generate nice looking PDF reports (powered by Jupyter!).
-    * and more! 
+* Predict investment growth over time
+* Estimate the monthly payments on car loans, mortgages, student loans, etc.
+* Approximate your total federal and state taxes.
+* Compare investments.
+* Generate nice looking PDF reports (powered by Jupyter!).
+* and more! 
 
 ## Table of contents
 
